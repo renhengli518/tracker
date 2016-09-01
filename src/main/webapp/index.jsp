@@ -6,8 +6,8 @@
 <title>test</title>
 <meta name="tp_page" content="HRD_SERACH_CATEGORY.32258">
 
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/tracker.js"></script>
+<script type="text/javascript" src="static/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/static/js/tracker.js"></script>
 </head>
 <body>
 <h2>TEST</h2>

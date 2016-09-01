@@ -113,10 +113,4 @@ public class HelloController {
 		return null;
 	} 
 	
-	@RequestMapping("getUeditorForm")
-	public String getUeditorForm(HttpServletRequest request, String ueditor){
-		System.out.println("----------editor---------------:"+ueditor);
-		return "userList";
-	}
-	
 }

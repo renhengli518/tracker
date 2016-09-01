@@ -25,16 +25,16 @@
 <meta http-equiv="description" content="This is my page">
 <link rel="stylesheet" type="text/css" href="uikit-2.3.1/css/uikit.gradient.min.css">
 <link rel="stylesheet" type="text/css" href="uikit-2.3.1/css/addons/uikit.addons.min.css">
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="static/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="uikit-2.3.1/js/uikit.min.js"></script>
 <script type="text/javascript" src="uikit-2.3.1/js/addons/notify.min.js"></script>
-<script type="text/javascript" src="js/sammy-latest.min.js"></script>
-<script type="text/javascript" src="js/datePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="static/js/sammy-latest.min.js"></script>
+<script type="text/javascript" src="static/js/datePicker/WdatePicker.js"></script>
 <!-- 图表JS -->
-<script src="./js/echarts/esl.js" type="text/javascript"></script>
-<script src="./js/echarts/bootstrap.min.js"></script>
+<script src="static/js/echarts/esl.js" type="text/javascript"></script>
+<script src="static/js/echarts/bootstrap.min.js"></script>
 <!-- 业务JS -->
-<script type="text/javascript" src="js/ga/ga_report.js"></script>
+<script type="text/javascript" src="static/js/ga/ga_report.js"></script>
 
 
 <script type="text/javascript">

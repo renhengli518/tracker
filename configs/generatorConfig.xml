@@ -21,9 +21,9 @@
 		<sqlMapGenerator targetPackage="com.hengpeng.itfintracker.mapper"	targetProject="itfintracker" />
 		<javaClientGenerator targetPackage="com.hengpeng.itfintracker.dao"	targetProject="itfintracker" type="XMLMAPPER" />
 
-		<table schema="" tableName="user_behavior_record" enableCountByExample="true"
-			enableUpdateByExample="true" enableDeleteByExample="true" 
-			enableSelectByExample="true" selectByExampleQueryId="true">
+		<table schema="" tableName="user_behavior_record" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
 		
 	</context>

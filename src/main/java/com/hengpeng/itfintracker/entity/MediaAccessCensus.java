@@ -1,85 +1,102 @@
 package com.hengpeng.itfintracker.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MediaAccessCensus {
-    private Integer id;
+public class MediaAccessCensus implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4389917385863062038L;
 
-    private String unionlv1;
+	private Integer id;
 
-    private Integer pv;
+	private String unionlv1;
 
-    private Integer uv;
+	private Integer pv;
 
-    private Integer orderpv;
+	private Integer uv;
 
-    private Integer secondclickcount;
+	private Integer orderpv;
 
-    private Integer accessdepth;
+	private Integer secondclickcount;
 
-    private Date date;
+	private Integer accessdepth;
 
-    public Integer getId() {
-        return id;
-    }
+	private Date date;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	private String stringDate;
 
-    public String getUnionlv1() {
-        return unionlv1;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setUnionlv1(String unionlv1) {
-        this.unionlv1 = unionlv1;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getPv() {
-        return pv;
-    }
+	public String getUnionlv1() {
+		return unionlv1;
+	}
 
-    public void setPv(Integer pv) {
-        this.pv = pv;
-    }
+	public void setUnionlv1(String unionlv1) {
+		this.unionlv1 = unionlv1;
+	}
 
-    public Integer getUv() {
-        return uv;
-    }
+	public Integer getPv() {
+		return pv;
+	}
 
-    public void setUv(Integer uv) {
-        this.uv = uv;
-    }
+	public void setPv(Integer pv) {
+		this.pv = pv;
+	}
 
-    public Integer getOrderpv() {
-        return orderpv;
-    }
+	public Integer getUv() {
+		return uv;
+	}
 
-    public void setOrderpv(Integer orderpv) {
-        this.orderpv = orderpv;
-    }
+	public void setUv(Integer uv) {
+		this.uv = uv;
+	}
 
-    public Integer getSecondclickcount() {
-        return secondclickcount;
-    }
+	public Integer getOrderpv() {
+		return orderpv;
+	}
 
-    public void setSecondclickcount(Integer secondclickcount) {
-        this.secondclickcount = secondclickcount;
-    }
+	public void setOrderpv(Integer orderpv) {
+		this.orderpv = orderpv;
+	}
 
-    public Integer getAccessdepth() {
-        return accessdepth;
-    }
+	public Integer getSecondclickcount() {
+		return secondclickcount;
+	}
 
-    public void setAccessdepth(Integer accessdepth) {
-        this.accessdepth = accessdepth;
-    }
+	public void setSecondclickcount(Integer secondclickcount) {
+		this.secondclickcount = secondclickcount;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public Integer getAccessdepth() {
+		return accessdepth;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setAccessdepth(Integer accessdepth) {
+		this.accessdepth = accessdepth;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getStringDate() {
+		return stringDate;
+	}
+
+	public void setStringDate(String stringDate) {
+		this.stringDate = stringDate;
+	}
+
 }
