@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hengpeng.itfintracker.dao.MediaAccessCensusMapper">
+  <resultMap id="BaseResultMap" type="com.hengpeng.itfintracker.entity.MediaAccessCensus">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="unionLv1" jdbcType="VARCHAR" property="unionlv1" />
+    <result column="pv" jdbcType="INTEGER" property="pv" />
+    <result column="uv" jdbcType="INTEGER" property="uv" />
+    <result column="orderPv" jdbcType="INTEGER" property="orderpv" />
+    <result column="secondClickCount" jdbcType="INTEGER" property="secondclickcount" />
+    <result column="accessDepth" jdbcType="INTEGER" property="accessdepth" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+     <result column="stringDate" jdbcType="VARCHAR" property="stringDate" />
+  </resultMap>
+  <insert id="insert" parameterType="com.hengpeng.itfintracker.entity.MediaAccessCensus">
+    insert into media_access_census (id, unionLv1, pv, 
+      uv, orderPv, secondClickCount, 
+      accessDepth, date, stringDate)
+    values (#{id,jdbcType=INTEGER}, #{unionlv1,jdbcType=VARCHAR}, #{pv,jdbcType=INTEGER}, 
+      #{uv,jdbcType=INTEGER}, #{orderpv,jdbcType=INTEGER}, #{secondclickcount,jdbcType=INTEGER}, 
+      #{accessdepth,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{stringDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hengpeng.itfintracker.entity.MediaAccessCensus">
+    insert into media_access_census
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="unionlv1 != null">
+        unionLv1,
+      </if>
+      <if test="pv != null">
+        pv,
+      </if>
+      <if test="uv != null">
+        uv,
+      </if>
+      <if test="orderpv != null">
+        orderPv,
+      </if>
+      <if test="secondclickcount != null">
+        secondClickCount,
+      </if>
+      <if test="accessdepth != null">
+        accessDepth,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+       <if test="stringDate != null">
+        stringDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="unionlv1 != null">
+        #{unionlv1,jdbcType=VARCHAR},
+      </if>
+      <if test="pv != null">
+        #{pv,jdbcType=INTEGER},
+      </if>
+      <if test="uv != null">
+        #{uv,jdbcType=INTEGER},
+      </if>
+      <if test="orderpv != null">
+        #{orderpv,jdbcType=INTEGER},
+      </if>
+      <if test="secondclickcount != null">
+        #{secondclickcount,jdbcType=INTEGER},
+      </if>
+      <if test="accessdepth != null">
+        #{accessdepth,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stringDate != null">
+        #{stringDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 根据时间区间查询列表 -->
+	<select id="getMediaAccessCensus" parameterType="java.util.HashMap"
+		resultMap="BaseResultMap">
+		select id, unionLv1, pv, uv, orderPv, secondClickCount,
+		accessDepth, date, stringDate
+		from MEDIA_ACCESS_CENSUS
+		where 1=1 
+		<if test="date_start != null">
+			and stringDate >= #{date_start}
+		</if>
+		<if test="date_start != null">
+			<![CDATA[ and stringDate <= #{date_end}  ]]>
+		</if>
+	</select>
+	
+	<!-- 根据时间值来查询 -->
+	<select id="getMediaAccessCensusByTime" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select id, unionLv1, pv, uv, orderPv, secondClickCount,
+		accessDepth, date, stringDate
+		from MEDIA_ACCESS_CENSUS
+		where 1=1 
+		<if test="value != null"> 
+			and stringDate = #{value}
+        </if> 
+	</select>
+</mapper>
