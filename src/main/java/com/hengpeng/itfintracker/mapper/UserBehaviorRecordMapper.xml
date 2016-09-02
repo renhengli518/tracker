@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hengpeng.itfintracker.dao.UserBehaviorRecordMapper">
+  <resultMap id="BaseResultMap" type="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="buttonPosition" jdbcType="VARCHAR" property="buttonposition" />
+    <result column="linkPosition" jdbcType="VARCHAR" property="linkposition" />
+    <result column="viewType" jdbcType="VARCHAR" property="viewtype" />
+    <result column="newUserFlag" jdbcType="VARCHAR" property="newuserflag" />
+    <result column="sessionId" jdbcType="VARCHAR" property="sessionid" />
+    <result column="endUserId" jdbcType="VARCHAR" property="enduserid" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="clientTime" jdbcType="TIMESTAMP" property="clienttime" />
+    <result column="userurgent" jdbcType="VARCHAR" property="userurgent" />
+    <result column="pageUrl" jdbcType="VARCHAR" property="pageurl" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="stayTime" jdbcType="VARCHAR" property="staytime" />
+    <result column="stayTimeMilSeconds" jdbcType="BIGINT" property="staytimemilseconds" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pagetitle" />
+    <result column="fromWhere" jdbcType="VARCHAR" property="fromwhere" />
+    <result column="clientSystem" jdbcType="VARCHAR" property="clientsystem" />
+    <result column="clientResolution" jdbcType="VARCHAR" property="clientresolution" />
+    <result column="clientPageType" jdbcType="VARCHAR" property="clientpagetype" />
+    <result column="serachKeyWords" jdbcType="VARCHAR" property="serachkeywords" />
+    <result column="stringDate" jdbcType="VARCHAR" property="stringdate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
+    <result column="refferPage" jdbcType="LONGVARCHAR" property="refferpage" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, buttonPosition, linkPosition, viewType, newUserFlag, sessionId, endUserId, ip, 
+    clientTime, userurgent, pageUrl, country, province, city, stayTime, stayTimeMilSeconds, 
+    pageTitle, fromWhere, clientSystem, clientResolution, clientPageType, serachKeyWords, 
+    stringDate
+  </sql>
+  <select id="getUserBehaviorBySessionId" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_behavior_record where 1=1
+    <if test="value != null">
+      and sessionId = #{value,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="getUserBehaviorRecordPageList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_behavior_record where 1=1
+    <if test="map.date_start != null">
+      and stringDate >= #{map.date_start,jdbcType=VARCHAR}
+    </if>
+    <if test="map.date_end != null">
+     <![CDATA[ and stringDate <= #{map.date_end,jdbcType=VARCHAR} ]]>
+    </if>
+    <if test="map.viewType != null">
+    	 and viewType = #{map.viewType,jdbcType=VARCHAR} 
+    </if>
+    order by  clientTime desc
+  </select>
+  
+  <insert id="insert" parameterType="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
+    insert into user_behavior_record (id, buttonPosition, linkPosition, 
+      viewType, newUserFlag, sessionId, 
+      endUserId, ip, clientTime, 
+      userurgent, pageUrl, country, 
+      province, city, stayTime, 
+      stayTimeMilSeconds, pageTitle, fromWhere, 
+      clientSystem, clientResolution, clientPageType, 
+      serachKeyWords, stringDate, refferPage
+      )
+    values (#{id,jdbcType=BIGINT}, #{buttonposition,jdbcType=VARCHAR}, #{linkposition,jdbcType=VARCHAR}, 
+      #{viewtype,jdbcType=VARCHAR}, #{newuserflag,jdbcType=VARCHAR}, #{sessionid,jdbcType=VARCHAR}, 
+      #{enduserid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{clienttime,jdbcType=TIMESTAMP}, 
+      #{userurgent,jdbcType=VARCHAR}, #{pageurl,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{staytime,jdbcType=VARCHAR}, 
+      #{staytimemilseconds,jdbcType=BIGINT}, #{pagetitle,jdbcType=VARCHAR}, #{fromwhere,jdbcType=VARCHAR}, 
+      #{clientsystem,jdbcType=VARCHAR}, #{clientresolution,jdbcType=VARCHAR}, #{clientpagetype,jdbcType=VARCHAR}, 
+      #{serachkeywords,jdbcType=VARCHAR}, #{stringdate,jdbcType=VARCHAR}, #{refferpage,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
+    insert into user_behavior_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="buttonposition != null">
+        buttonPosition,
+      </if>
+      <if test="linkposition != null">
+        linkPosition,
+      </if>
+      <if test="viewtype != null">
+        viewType,
+      </if>
+      <if test="newuserflag != null">
+        newUserFlag,
+      </if>
+      <if test="sessionid != null">
+        sessionId,
+      </if>
+      <if test="enduserid != null">
+        endUserId,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="clienttime != null">
+        clientTime,
+      </if>
+      <if test="userurgent != null">
+        userurgent,
+      </if>
+      <if test="pageurl != null">
+        pageUrl,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="staytime != null">
+        stayTime,
+      </if>
+      <if test="staytimemilseconds != null">
+        stayTimeMilSeconds,
+      </if>
+      <if test="pagetitle != null">
+        pageTitle,
+      </if>
+      <if test="fromwhere != null">
+        fromWhere,
+      </if>
+      <if test="clientsystem != null">
+        clientSystem,
+      </if>
+      <if test="clientresolution != null">
+        clientResolution,
+      </if>
+      <if test="clientpagetype != null">
+        clientPageType,
+      </if>
+      <if test="serachkeywords != null">
+        serachKeyWords,
+      </if>
+      <if test="stringdate != null">
+        stringDate,
+      </if>
+      <if test="refferpage != null">
+        refferPage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="buttonposition != null">
+        #{buttonposition,jdbcType=VARCHAR},
+      </if>
+      <if test="linkposition != null">
+        #{linkposition,jdbcType=VARCHAR},
+      </if>
+      <if test="viewtype != null">
+        #{viewtype,jdbcType=VARCHAR},
+      </if>
+      <if test="newuserflag != null">
+        #{newuserflag,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionid != null">
+        #{sessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="enduserid != null">
+        #{enduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="clienttime != null">
+        #{clienttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userurgent != null">
+        #{userurgent,jdbcType=VARCHAR},
+      </if>
+      <if test="pageurl != null">
+        #{pageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="staytime != null">
+        #{staytime,jdbcType=VARCHAR},
+      </if>
+      <if test="staytimemilseconds != null">
+        #{staytimemilseconds,jdbcType=BIGINT},
+      </if>
+      <if test="pagetitle != null">
+        #{pagetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fromwhere != null">
+        #{fromwhere,jdbcType=VARCHAR},
+      </if>
+      <if test="clientsystem != null">
+        #{clientsystem,jdbcType=VARCHAR},
+      </if>
+      <if test="clientresolution != null">
+        #{clientresolution,jdbcType=VARCHAR},
+      </if>
+      <if test="clientpagetype != null">
+        #{clientpagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="serachkeywords != null">
+        #{serachkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="stringdate != null">
+        #{stringdate,jdbcType=VARCHAR},
+      </if>
+      <if test="refferpage != null">
+        #{refferpage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
