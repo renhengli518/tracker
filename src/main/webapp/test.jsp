@@ -57,7 +57,7 @@
 		<ul class="uk-subnav uk-subnav-pill">
 			<li><a href="#changeDataType/chart">图表</a></li>
 			<li><a href="#changeDataType/orgData">原始数据</a></li>
-			<li><a target="_blank" href="index.jsp">test</a></li>
+			<li><a target="_blank" href="test1.jsp">test</a></li>
 		</ul>
 	</div>
 	<div id="inputUI">

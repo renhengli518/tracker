@@ -6,16 +6,16 @@
 <title>test</title>
 <meta name="tp_page" content="HRD_SERACH_CATEGORY.32258">
 
+<script type="text/javascript" src="static/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/tracker.js"></script>
-<jsp:include page="header.jsp"></jsp:include> 
 </head>
 <body>
 <h2>管理中心</h2>
 <label></label>
-<a href="${root}/userBehaviorRecord/index">用户行为列表</a>
-</br>
-<a href="test.jsp">用户行为报表列表</a>
-</br>
-<a href="test1.jsp">测试用户行为页面</a>
+<input type="button"  value="测试"/>
+
 </body>
+<script type="text/javascript">
+	var userId = "";
+</script>
 </html>

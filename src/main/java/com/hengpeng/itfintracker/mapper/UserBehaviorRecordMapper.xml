@@ -44,6 +44,23 @@
       and sessionId = #{value,jdbcType=VARCHAR}
     </if>
   </select>
+  
+  <select id="getUserBehaviorRecordPageList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_behavior_record where 1=1
+    <if test="map.date_start != null">
+      and stringDate >= #{map.date_start,jdbcType=VARCHAR}
+    </if>
+    <if test="map.date_end != null">
+     <![CDATA[ and stringDate <= #{map.date_end,jdbcType=VARCHAR} ]]>
+    </if>
+    <if test="map.viewType != null">
+    	 and viewType = #{map.viewType,jdbcType=VARCHAR} 
+    </if>
+    order by  clientTime desc
+  </select>
+  
   <insert id="insert" parameterType="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
     insert into user_behavior_record (id, buttonPosition, linkPosition, 
       viewType, newUserFlag, sessionId, 

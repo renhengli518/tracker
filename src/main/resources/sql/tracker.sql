@@ -27,7 +27,8 @@ CREATE TABLE `media_access_census` (
   `orderPv` int(11) DEFAULT NULL,
   `secondClickCount` int(11) DEFAULT NULL,
   `accessDepth` int(11) DEFAULT NULL,
-  `date` datetime DEFAULT NULL
+  `date` datetime DEFAULT NULL,
+  `stringDate` varchar(10) DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

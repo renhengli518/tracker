@@ -37,7 +37,7 @@ public class PagePlugin implements Interceptor {
 	
 	private static final Log log = LogFactory.getLog(PagePlugin.class);
 
-	private static String dialect = "oracle"; // 数据库方言
+	private static String dialect = "mysql"; // 数据库方言
 	private static String pageSqlId = ".*PageList.*"; // mapper.xml中需要拦截的ID(正则匹配)
 
 	@Override

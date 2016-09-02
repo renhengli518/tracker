@@ -74,15 +74,15 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private MediaAccessCensusMapper mediaAccessCensusDao;
 
-	public List<MediaAccessCensus> getDailyMediaReport(String startdate,String endDate) throws Exception {
-		Map<String,Object> map = new HashMap<String,Object>();
+	public List<MediaAccessCensus> getDailyMediaReport(String startdate, String endDate) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("date_start", startdate);
 		map.put("date_end", endDate);
 		return mediaAccessCensusDao.getMediaAccessCensus(map);
 	}
 
-	public List<MediaTypeReportDto> getDailyMediaReportGroupByMediaType(String startdate,String endDate) throws Exception {
-		Map<String,Object> map = new HashMap<String,Object>();
+	public List<MediaTypeReportDto> getDailyMediaReportGroupByMediaType(String startdate, String endDate) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("date_start", startdate);
 		map.put("date_end", endDate);
 		List<MediaAccessCensus> mediaAccessCensuss = mediaAccessCensusDao.getMediaAccessCensus(map);
@@ -124,9 +124,9 @@ public class ReportServiceImpl implements ReportService {
 		}
 		return result;
 	}
-	
-	public List<MediaTypeReportDto> getMediaAccessCensusByTime(String date){
-		List<MediaAccessCensus> mediaAccessCensuss =  this.mediaAccessCensusDao.getMediaAccessCensusByTime(date);
+
+	public List<MediaTypeReportDto> getMediaAccessCensusByTime(String date) {
+		List<MediaAccessCensus> mediaAccessCensuss = this.mediaAccessCensusDao.getMediaAccessCensusByTime(date);
 		List<MediaTypeReportDto> result = new ArrayList<MediaTypeReportDto>();
 		Map<Integer, MediaTypeReportDto> logicMap = new HashMap<Integer, MediaTypeReportDto>();
 
