@@ -6,7 +6,6 @@
 <title>test</title>
 <meta name="tp_page" content="HRD_SERACH_CATEGORY.32258">
 
-<script type="text/javascript" src="<%=request.getContextPath() %>/static/js/tracker.js"></script>
 <jsp:include page="header.jsp"></jsp:include> 
 </head>
 <body>

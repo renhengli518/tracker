@@ -115,7 +115,7 @@ SplitPage.prototype = {
         	links +="<span style='display:inline-block;'>共"+this.totalNum+"页&nbsp;&nbsp;</span>";
         }
         if(this.showGoPage=="YES") {
-            links += "<span style='display:inline-block;'>去第</span> <div class='page_go_cont'><input type='input' min='1' max="+this.totalNum+" class='pageIndex' /><a href='javascript:;' class='page_go'>确定</a></div><span style='display:inline-block;' > 页</span>";
+            links += "<span style='display:inline-block;'>去第</span> <input type='input' min='1' max="+this.totalNum+" class='pageIndex' /><a href='javascript:;' style='margin-left:4px;margin-right:4px;color:#fff;background-color:#4576d1;border:1px solid #4576d1' class='page_go'>确定</a><span style='display:inline-block;' > 页</span>";
         }
         this.myPageSpan.innerHTML = links;
 
@@ -150,7 +150,7 @@ SplitPage.prototype = {
         events.delegate(that.myPageSpan, '.page_go', 'click', function(e){
             var n = that.goAnchor.previousSibling.value;
             if(n-0 > 0 && n-0 <= that.totalNum) that.getByNum(n);
-            $(this).parent().removeClass('showDom');
+            //$(this).parent().removeClass('showDom');
         });
         events.delegate(that.myPageSpan,'a', 'click',function(){
             var e = arguments[0] || window.event,
@@ -159,14 +159,14 @@ SplitPage.prototype = {
             if(n && !hasClass(target,'curr')) that.getByNum(n);
         });
         $(that.myPageSpan).on('focus', '.pageIndex', function(e){
-            $(this).parent().addClass('showDom');
+            //$(this).parent().addClass('showDom');
         });
         $('html').on('click', function(e){
             var pageGoBtn = $(that.myPageSpan).find('.page_go')[0];
             var pageGoInput = $(that.myPageSpan).find('.pageIndex')[0];
             if (e.target != pageGoInput) {
                 if (e.target != pageGoBtn) {
-                    $(pageGoBtn).parent().removeClass('showDom');
+                  //  $(pageGoBtn).parent().removeClass('showDom');
                 } else {
                     return false;
                 }
