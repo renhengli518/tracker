@@ -25,6 +25,8 @@
     <result column="clientPageType" jdbcType="VARCHAR" property="clientpagetype" />
     <result column="serachKeyWords" jdbcType="VARCHAR" property="serachkeywords" />
     <result column="stringDate" jdbcType="VARCHAR" property="stringdate" />
+    <result column="browserType" jdbcType="VARCHAR" property="browsertype" />
+    <result column="browserVersion" jdbcType="VARCHAR" property="browserversion" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
     <result column="refferPage" jdbcType="LONGVARCHAR" property="refferpage" />
@@ -34,7 +36,7 @@
     id, buttonPosition, linkPosition, viewType, newUserFlag, sessionId, endUserId, ip, 
     clientTime, userurgent, pageUrl, country, province, city, stayTime, stayTimeMilSeconds, 
     pageTitle, fromWhere, clientSystem, clientResolution, clientPageType, serachKeyWords, 
-    stringDate,refferPage
+    stringDate,refferPage,browserType,browserVersion
   </sql>
   <select id="getUserBehaviorBySessionId" parameterType="String" resultMap="BaseResultMap">
     select
@@ -85,7 +87,7 @@
       province, city, stayTime, 
       stayTimeMilSeconds, pageTitle, fromWhere, 
       clientSystem, clientResolution, clientPageType, 
-      serachKeyWords, stringDate, refferPage
+      serachKeyWords, stringDate, refferPage,browserType,browserVersion
       )
     values (#{id,jdbcType=BIGINT}, #{buttonposition,jdbcType=VARCHAR}, #{linkposition,jdbcType=VARCHAR}, 
       #{viewtype,jdbcType=VARCHAR}, #{newuserflag,jdbcType=VARCHAR}, #{sessionid,jdbcType=VARCHAR}, 
@@ -95,7 +97,7 @@
       #{staytimemilseconds,jdbcType=BIGINT}, #{pagetitle,jdbcType=VARCHAR}, #{fromwhere,jdbcType=VARCHAR}, 
       #{clientsystem,jdbcType=VARCHAR}, #{clientresolution,jdbcType=VARCHAR}, #{clientpagetype,jdbcType=VARCHAR}, 
       #{serachkeywords,jdbcType=VARCHAR}, #{stringdate,jdbcType=VARCHAR}, #{refferpage,jdbcType=LONGVARCHAR}
-      )
+      , #{browsertype,jdbcType=VARCHAR}, #{browserversion,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
     insert into user_behavior_record
@@ -172,6 +174,12 @@
       <if test="refferpage != null">
         refferPage,
       </if>
+      <if test="browsertype != null">
+        browsertype,
+      </if>
+      <if test="browserversion != null">
+        browserversion,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -245,6 +253,12 @@
       </if>
       <if test="refferpage != null">
         #{refferpage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="browsertype != null">
+        #{browsertype,jdbcType=VARCHAR},
+      </if>
+       <if test="browserversion != null">
+        #{browserversion,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

@@ -12,7 +12,7 @@ userBehaviorRecordListApp.controller('userBehaviorRecordListCtrl', [ '$scope', '
 		"code" : "a_link",
 		"name" : "点击链接"
 	}, {
-		"code" : "button_click",
+		"code" : "buttonClick",
 		"name" : "点击按钮"
 	} ];
 	$scope.pageList = function() {
@@ -63,11 +63,13 @@ userBehaviorRecordListApp.controller('userBehaviorRecordListCtrl', [ '$scope', '
 				//$scope.filePath = data.resultValue;
 				//下载文件
 				window.open("/downLoadFileServlet?url="+data.resultValue);
+				Win.alert(data.resultMsg);
+			}else{
+				Win.warning(data.resultMsg);
 			}
-			alert(data.resultMsg);
 			//$("#filePath").click();
 		}).error(function(data, header, config, status) {
-			alert("导出失败！");
+			Win.error("导出失败！");
 		});
 	}
 	

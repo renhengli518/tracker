@@ -87,6 +87,8 @@ public class PageViewServlet extends HttpServlet {
 		String serachKeyWords = bd_map.get("serachKeyWords");
 		String linkPosition = bd_map.get("linkPosition");
 		String viewType = bd_map.get("viewType");
+		String browserType = bd_map.get("browserType");
+		String browserVersion = bd_map.get("browserVersion");
 		List<UserBehaviorRecord> list = this.pageViewService.getUserBehaviorBySessionId(sessionId);
 		String newUserFlag = "YES";
 		if (CollectionUtils.isNotEmpty(list) && list.size() > 0) {
@@ -95,10 +97,9 @@ public class PageViewServlet extends HttpServlet {
 		/**
 		 * 添加记录，写入MySQL
 		 */
-		UserBehaviorRecord behaviorUser = new UserBehaviorRecord(buttonPosition, linkPosition, viewType, ip, sessionId,
-				endUserId, clientTime, newUserFlag, userurgent, pageUrl, country, province, city, stayTime,
-				stayTimeMilSeconds, pageTitle, refferPage, clientSystem, clientResolution, clientPageType, fromWhere,
-				serachKeyWords, stringDate);
+		UserBehaviorRecord behaviorUser = new UserBehaviorRecord(buttonPosition, linkPosition, viewType, ip, sessionId, endUserId, clientTime,
+				newUserFlag, userurgent, pageUrl, country, province, city, stayTime, stayTimeMilSeconds, pageTitle, refferPage, clientSystem,
+				clientResolution, clientPageType, fromWhere, serachKeyWords, stringDate, browserType, browserVersion);
 		this.pageViewService.savePageViewInfoToDB(behaviorUser);
 	}
 

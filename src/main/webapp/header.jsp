@@ -24,4 +24,6 @@
 <link media="all" type="text/css" rel="stylesheet" href="${root}/static/css/space.css" />
 <link rel="stylesheet" type="text/css" href="${root}/uikit-2.3.1/css/uikit.gradient.min.css">
 <link rel="stylesheet" type="text/css" href="${root}/uikit-2.3.1/css/addons/uikit.addons.min.css">
+<!-- alert dialog -->
+<link rel="stylesheet" href="${root}/static/art_dialog/css/ui-dialog.css">
 

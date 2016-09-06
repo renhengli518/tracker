@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hengpeng.itfintracker.commons.constant.ReturnConstant;
 import com.hengpeng.itfintracker.commons.model.ReturnResultUtil;
 import com.hengpeng.itfintracker.commons.page.Page;
-import com.hengpeng.itfintracker.commons.utils.Excel;
+import com.hengpeng.itfintracker.commons.utils.UserBehaviorExcelUtils;
 import com.hengpeng.itfintracker.entity.UserBehaviorRecord;
 import com.hengpeng.itfintracker.service.PageViewService;
 
@@ -79,7 +79,7 @@ public class UserBehaviorRecordController {
 		}
 		List<UserBehaviorRecord> list = pageViewService.getUserBehaviorRecordList(map);
 		if(CollectionUtils.isNotEmpty(list)){
-			String filePath = Excel.exportUserBehaviorRecordList(list, exportPath);
+			String filePath = UserBehaviorExcelUtils.exportUserBehaviorRecordList(list, exportPath);
 			//自动下载文件开始
 			//request.getRequestDispatcher("/downLoadFileServlet?url="+filePath).forward(request, response);
 			logger.debug("导出用户行为列表结束");

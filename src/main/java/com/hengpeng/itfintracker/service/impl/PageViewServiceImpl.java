@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hengpeng.itfintracker.commons.page.Page;
-import com.hengpeng.itfintracker.commons.utils.Excel;
+import com.hengpeng.itfintracker.commons.utils.UserBehaviorExcelUtils;
 import com.hengpeng.itfintracker.dao.UserBehaviorRecordMapper;
 import com.hengpeng.itfintracker.entity.UserBehaviorRecord;
 import com.hengpeng.itfintracker.service.PageViewService;

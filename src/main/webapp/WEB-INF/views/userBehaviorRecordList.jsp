@@ -74,7 +74,8 @@
 					<th width="100px">用户名</th>
 					<th width="100px">触发时间</th>
 					<th width="100px">新用户</th>
-					<th width="100px">浏览器</th>
+					<th width="100px">浏览器类型</th>
+					<th width="100px">浏览器版本</th>
 					<th width="100px">访问页面</th>
 					<th width="100px">国家</th>
 					<th width="100px">省份</th>
@@ -99,7 +100,8 @@
 					<td width="100px" ng-bind="obj.enduserid"></td>
 					<td width="100px" ng-bind="obj.clienttime"></td>
 					<td width="100px" ng-bind="obj.newuserflag"></td>
-					<td width="100px" ng-bind="obj.userurgent"></td>
+					<td width="100px" ng-bind="obj.browsertype"></td>
+					<td width="100px" ng-bind="obj.browserversion"></td>
 					<td width="100px" ng-bind="obj.pageurl"></td>
 					<td width="100px" ng-bind="obj.country"></td>
 					<td width="100px" ng-bind="obj.province"></td>

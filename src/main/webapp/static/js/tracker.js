@@ -16,6 +16,8 @@ var fromWhere="直接访问";
 var serachKeyWords="";
 //var lastModified = document.lastModified;
 var urlPrefix = {ga: "http://192.168.1.96:7777"};
+var browserType;
+var browserVersion;
 $(function(){
 	//判断用户是否登录,需要在植入代码的页面定义全局变量，并获取登录的用户的userID
 	if(userId && userId != null && userId != ""){
@@ -70,11 +72,7 @@ $(function(){
 			addCookie('key', '', 1);
 		}
 	}
-	//var ckey = (getCookie('key'))
-	//alert(ckey);
-	//if (ykey.indexOf(skey) > -1) {
-	//} else {
-	//}
+
 	function deleteCookie(name) {
 		var date = new Date();
 		date.setTime(date.getTime() - 10000);
@@ -111,35 +109,47 @@ $(function(){
 	    province = obj.province;
 	    city = obj.city;
 	});
-	
+	//获取浏览器类型和版本
+	var sys = getBrowserInfo();
+	browserType = sys.browser;
+	browserVersion = sys.version;
 	
 	//初始化数据埋点
 	//1.处理带input=button的元素
 	$(document).on("click","input[type='button']",function(){
 		buttonPosition = $(this).val();
-		gotracker(buttonPosition,'','buttonClick',endUserId,pageUrl,country,province,city,pageTitle,refferPage,fromWhere,serachKeyWords);
+		gotracker(buttonPosition,'','buttonClick',endUserId,pageUrl,country,province,city,pageTitle,refferPage,fromWhere,serachKeyWords,browserType,browserVersion);
 	})
 	//处理a标签
 	$(document).on("click","a",function(){
 		var href = $(this).attr("href");
 		var text = $(this).text();
 		if(href && href != "" && href != null){
-			gotracker('',text,'a_link',endUserId,pageUrl,country,province,city,pageTitle,refferPage,fromWhere,serachKeyWords);
+			gotracker('',text,'a_link',endUserId,pageUrl,country,province,city,pageTitle,refferPage,fromWhere,serachKeyWords,browserType,browserVersion);
 		}
 	});
-//	setTimeout(function(){
-//		gotracker('','','pageView',endUserId,pageUrl,country,province,city,pageTitle,refferPage);
-//	},500);
 	
 });
 window.onunload = function(){
-	gotracker('','','pageView',endUserId,pageUrl,country,province,city,pageTitle,refferPage,fromWhere,serachKeyWords);
+	gotracker('','','pageView',endUserId,pageUrl,country,province,city,pageTitle,refferPage,fromWhere,serachKeyWords,browserType,browserVersion);
 }
-
+/**
+ * 获取浏览器类型和版本
+ * @returns {___anonymous4550_4551}
+ */
+function getBrowserInfo(){
+    var Sys = {};
+    var ua = navigator.userAgent.toLowerCase();
+    var re =/(msie|firefox|chrome|opera|version).*?([\d.]+)/;
+    var m = ua.match(re);
+    Sys.browser = m[1].replace(/version/, "'safari");
+    Sys.version = m[2];
+    return Sys;
+}
 
 /** 用户行为记录 */
 function gotracker( buttonPosition,linkPosition,viewType, endUserId, 
-		 pageUrl, country,  province, city, pageTitle, refferPage,fromWhere,serachKeyWords) {// 行为记录调用函数
+		 pageUrl, country,  province, city, pageTitle, refferPage,fromWhere,serachKeyWords,browserType,browserVersion) {// 行为记录调用函数
 	//首先判断是否是新访客
 	var endtime = new Date();
 	var waittime = endtime.getTime() - begintime.getTime();
@@ -207,6 +217,12 @@ function gotracker( buttonPosition,linkPosition,viewType, endUserId,
 	}
 	if (fromWhere) {// 网页来源
 		w.addParameter(new Parameter("fromWhere", fromWhere));
+	}
+	if (browserType) {
+		w.addParameter(new Parameter("browserType", browserType));
+	}
+	if (browserVersion) {
+		w.addParameter(new Parameter("browserVersion", browserVersion));
 	}
 	// 触发时间
 	w.addParameter(new Parameter("clientTime", new Date().getTime()));
@@ -372,73 +388,5 @@ trackerSupportKey.viewType = "viewType";
 trackerSupportKey.serachKeyWords = "serachKeyWords";
 trackerSupportKey.fromWhere = "fromWhere";
 trackerSupportKey.endUserId = "endUserId";
-
-//trackerSupportKey.infoPageId = "w_pif";
-//trackerSupportKey.tp = "w_tp";
-//trackerSupportKey.tc = "w_tc";
-//trackerSupportKey.guid = "guid";
-//trackerSupportKey.attachedInfo = "b_ai";
-//trackerSupportKey.tracker_u = "b_tu";
-//trackerSupportKey.tracker_type = "b_trt";
-//trackerSupportKey.ip = "u_ip";
-//trackerSupportKey.infoTrackerSrc = "w_ts";
-//trackerSupportKey.infoTrackerSrc = "w_ts";
-//trackerSupportKey.cookie = "w_ck";
-//trackerSupportKey.orderCode = "b_oc";
-//trackerSupportKey.firstLink = "w_flk";
-//trackerSupportKey.curMerchantId = "u_cm";
-//trackerSupportKey.provinceId = "u_pid";
-//trackerSupportKey.fee = "b_fee";
-//trackerSupportKey.edmActivity = "b_ea";
-//trackerSupportKey.edmEmail = "b_ee";
-//trackerSupportKey.edmJobId = "b_ejb";
-//trackerSupportKey.internalKeyword = "b_ik";
-//trackerSupportKey.resultSum = "b_rs";
-//trackerSupportKey.currentPage = "b_scp";
-//trackerSupportKey.linkPosition = "b_lp";
-//trackerSupportKey.adgroupKeywordID = "b_ak";
-//trackerSupportKey.extField3 = "b_set";
-//trackerSupportKey.extField6 = "b_adt";
-//trackerSupportKey.extField7 = "b_pmi";
-//trackerSupportKey.extField8 = "b_tid";
-//trackerSupportKey.extField9 = "b_cid";
-//trackerSupportKey.extField10 = "s_and";
-//trackerSupportKey.unid = "w_un";
-//trackerSupportKey.refPageTypeId = "w_rpt";
-//trackerSupportKey.refUnid = "w_run";
-//trackerSupportKey.refPageValue = "w_rpv";
-//trackerSupportKey.eventId = "b_ei";
-//trackerSupportKey.labelId = "b_li";
-//trackerSupportKey.filterInfo = "b_fi";
-//trackerSupportKey.activityId = "b_aci";
-//trackerSupportKey.listCategoryId = "b_lci";
-//trackerSupportKey.pmStatusTypeId = "b_pms";
-//trackerSupportKey.container = "s_ct";
-//trackerSupportKey.containerVersion = "s_ctv";
-//trackerSupportKey.platVersion = "s_pv";
-//trackerSupportKey.phoneType = "s_pt";
-//trackerSupportKey.provider = "s_pro";
-//trackerSupportKey.netType = "s_nt";
-//trackerSupportKey.tpa = "w_tpa";
-//trackerSupportKey.tpc = "w_tpc";
-//trackerSupportKey.tpi = "w_tpi";
-//trackerSupportKey.tcs = "w_tcs";
-//trackerSupportKey.tcsa = "w_tca";
-//trackerSupportKey.tcdt = "w_tct";
-//trackerSupportKey.tcd = "w_tcd";
-//trackerSupportKey.tci = "w_tci";
-//trackerSupportKey.tce = "w_tce";
-//trackerSupportKey.positionTypeId = "b_pyi";
-//trackerSupportKey.scrollTop = "w_st";
-//trackerSupportKey.abtestValue = "b_abv";
-//trackerSupportKey.productId = "b_pid";// 产品ID
-//trackerSupportKey.extField = "b_ext";
-//trackerSupportKey.pageCode = "w_pv";// 页面ID
-//trackerSupportKey.endUserId = "u_uid";
-//trackerSupportKey.clientType = "c_type";
-//trackerSupportKey.browserToken = "b_btk";// 客户唯一标识
-//trackerSupportKey.referer = "b_ref";// 来源
-//trackerSupportKey.pageAmount = "u_amt";// 页面上金额
-//trackerSupportKey.pt = "pt";// 页面上金额
-//trackerSupportKey.exPt = "exPt";// 页面上金额
-
+trackerSupportKey.browserType = "browserType";
+trackerSupportKey.browserVersion = "browserVersion";

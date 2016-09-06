@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hengpeng.itfintracker.commons.utils.Excel;
+import com.hengpeng.itfintracker.commons.utils.UserBehaviorExcelUtils;
 import com.hengpeng.itfintracker.commons.utils.ResultJson;
 
 @Controller
@@ -66,7 +66,7 @@ public class HelloController {
 		original = (original == null) ? "" : original;
 		File file_1 = new File("d:/"+file.getOriginalFilename());
 		file.transferTo(file_1);// 写入目标文件
-		Excel.extractLoanEOT(file_1);
+		UserBehaviorExcelUtils.extractLoanEOT(file_1);
 //		FileInputStream in = new FileInputStream("d:/"+file.getOriginalFilename());
 //		POIFSFileSystem pfs = new POIFSFileSystem(in);
 //		HWPFDocument hwfp = new HWPFDocument(pfs);

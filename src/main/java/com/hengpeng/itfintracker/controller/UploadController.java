@@ -27,7 +27,7 @@ import com.hengpeng.itfintracker.commons.constant.ReturnConstant;
 import com.hengpeng.itfintracker.commons.model.FileUpload;
 import com.hengpeng.itfintracker.commons.model.MultipartFileValidator;
 import com.hengpeng.itfintracker.commons.model.ReturnResultUtil;
-import com.hengpeng.itfintracker.commons.utils.Excel;
+import com.hengpeng.itfintracker.commons.utils.UserBehaviorExcelUtils;
 
 @Controller
 public class UploadController {
@@ -280,7 +280,7 @@ public class UploadController {
     		path =path.substring(0, path.lastIndexOf("\\"));
     		path =path.substring(0, path.lastIndexOf("\\")+1);
     		File file = new File(path+"main/webapp/downloadTemp/commentsImport.xls");
-    		Excel.extractLoanEOT(file);
+    		UserBehaviorExcelUtils.extractLoanEOT(file);
     		return "ok";
     	}catch(Exception e){
     		return "no";

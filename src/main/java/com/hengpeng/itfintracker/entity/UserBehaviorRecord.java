@@ -53,6 +53,10 @@ public class UserBehaviorRecord {
 
 	private String refferpage;
 
+	private String browsertype;
+
+	private String browserversion;
+
 	public Long getId() {
 		return id;
 	}
@@ -245,6 +249,22 @@ public class UserBehaviorRecord {
 		this.refferpage = refferpage;
 	}
 
+	public String getBrowsertype() {
+		return browsertype;
+	}
+
+	public void setBrowsertype(String browsertype) {
+		this.browsertype = browsertype;
+	}
+
+	public String getBrowserversion() {
+		return browserversion;
+	}
+
+	public void setBrowserversion(String browserversion) {
+		this.browserversion = browserversion;
+	}
+
 	/**
 	 * 构造方法
 	 * 
@@ -266,6 +286,7 @@ public class UserBehaviorRecord {
 
 	/**
 	 * 构造方法
+	 * 
 	 * @param buttonPosition
 	 * @param linkPosition
 	 * @param viewType
@@ -290,11 +311,10 @@ public class UserBehaviorRecord {
 	 * @param serachKeyWords
 	 * @param stringDate
 	 */
-	public UserBehaviorRecord(String buttonPosition, String linkPosition, String viewType, String ip, String sessionId,
-			String endUserId, Date clientTime, String newUserFlag, String userurgent, String pageUrl, String country,
-			String province, String city, String stayTime, Long stayTimeMilSeconds, String pageTitle, String refferPage,
-			String clientSystem, String clientResolution, String clientPageType, String fromWhere,
-			String serachKeyWords, String stringDate) {
+	public UserBehaviorRecord(String buttonPosition, String linkPosition, String viewType, String ip, String sessionId, String endUserId,
+			Date clientTime, String newUserFlag, String userurgent, String pageUrl, String country, String province, String city, String stayTime,
+			Long stayTimeMilSeconds, String pageTitle, String refferPage, String clientSystem, String clientResolution, String clientPageType,
+			String fromWhere, String serachKeyWords, String stringDate, String browserType, String browserVersion) {
 		super();
 		this.id = ID.getInstanse().getID(18);
 		this.buttonposition = buttonPosition;
@@ -320,5 +340,7 @@ public class UserBehaviorRecord {
 		this.fromwhere = fromWhere;
 		this.serachkeywords = serachKeyWords;
 		this.stringdate = stringDate;
+		this.browsertype = browserType;
+		this.browserversion = browserVersion;
 	}
 }
