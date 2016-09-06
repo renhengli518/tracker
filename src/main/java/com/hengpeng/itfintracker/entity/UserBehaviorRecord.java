@@ -1,10 +1,20 @@
 package com.hengpeng.itfintracker.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import com.hengpeng.itfintracker.commons.utils.ID;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-public class UserBehaviorRecord {
+import com.hengpeng.itfintracker.commons.utils.ID;
+import com.hengpeng.itfintracker.commons.utils.LongDateSerializer;
+
+public class UserBehaviorRecord implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 175368790131682651L;
+
 	private Long id;
 
 	private String buttonposition;
@@ -21,6 +31,7 @@ public class UserBehaviorRecord {
 
 	private String ip;
 
+	@JsonSerialize(using = LongDateSerializer.class)
 	private Date clienttime;
 
 	private String userurgent;
