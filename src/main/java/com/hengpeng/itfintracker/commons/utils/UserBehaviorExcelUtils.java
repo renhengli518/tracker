@@ -105,7 +105,7 @@ public class UserBehaviorExcelUtils {
 		            destDir.mkdirs();
 		        }
 			// 打开文件
-			String fileName = System.currentTimeMillis() + "_" + "用户行为报表" + ".xls";
+			String fileName = DateUtils.format(System.currentTimeMillis(),"yyyy_MM_dd_HH_mm_ss") + "_" + "用户行为报表" + ".xls";
 			filepath = path + File.separator + fileName;// 导出的文件的路径
 			book = Workbook.createWorkbook(new File(path, fileName));
 			WritableSheet sheet = book.createSheet("用户行为列表", 0);// 第一个sheet的题目
