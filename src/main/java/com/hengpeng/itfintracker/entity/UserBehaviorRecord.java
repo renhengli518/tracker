@@ -3,7 +3,6 @@ package com.hengpeng.itfintracker.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.hengpeng.itfintracker.commons.utils.ID;

@@ -10,13 +10,14 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2016-08-31 18:07:57
+Date: 2016-09-06 12:45:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
+
 -- ----------------------------
--- Table structure for ga_media_access_census
+-- Table structure for media_access_census
 -- ----------------------------
 DROP TABLE IF EXISTS `media_access_census`;
 CREATE TABLE `media_access_census` (
@@ -28,11 +29,12 @@ CREATE TABLE `media_access_census` (
   `secondClickCount` int(11) DEFAULT NULL,
   `accessDepth` int(11) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `stringDate` varchar(10) DEFAULT NULL,
+  `stringDate` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 -- ----------------------------
--- Table structure for ga_user_behavior_record
+-- Table structure for user_behavior_record
 -- ----------------------------
 DROP TABLE IF EXISTS `user_behavior_record`;
 CREATE TABLE `user_behavior_record` (
@@ -60,7 +62,8 @@ CREATE TABLE `user_behavior_record` (
   `clientPageType` varchar(255) DEFAULT NULL,
   `serachKeyWords` varchar(255) DEFAULT NULL,
   `stringDate` varchar(10) DEFAULT NULL,
+  `browserType` varchar(255) DEFAULT NULL,
+  `browserVersion` varchar(255) DEFAULT NULL,
   UNIQUE KEY `id` (`id`) USING BTREE,
   KEY `stringDate` (`stringDate`) USING HASH
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
