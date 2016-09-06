@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:task="http://www.springframework.org/schema/task" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
@@ -21,6 +21,7 @@
 			<list>
 				<value>classpath:config.properties</value>
 				<value>classpath:jdbc.properties</value>
+				<value>classpath:redis.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -61,6 +62,13 @@
 		</property>
 		<property name="mapperLocations"
 			value="classpath:com/hengpeng/itfintracker/mapper/*.xml"></property>
+		<property name="configurationProperties">
+			<props>
+				<prop key="cacheEnabled">true</prop>
+				<prop key="lazyLoadingEnabled">false</prop>
+				<prop key="aggressiveLazyLoading">true</prop>
+			</props>
+        </property>
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -109,4 +117,19 @@
 	<context:annotation-config/>  
     	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>  
     <context:component-scan base-package="com.hengpeng.itfintracker.task"/>  
+    
+    <!-- redis数据源 -->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+	    <property name="maxIdle" value="${redis.maxIdle}" />  
+	    <property name="maxTotal" value="${redis.maxActive}" />  
+	    <property name="maxWaitMillis" value="${redis.maxWait}" />  
+	    <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
+	</bean>
+	<!-- Spring-redis连接池管理工厂 -->
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"  
+	    p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.pass}"  p:pool-config-ref="poolConfig"/>  
+	<!-- 使用中间类解决RedisCache.jedisConnectionFactory的静态注入，从而使MyBatis实现第三方缓存 -->
+	<bean id="redisCacheTransfer" class="com.hengpeng.itfintracker.commons.utils.RedisCacheTransfer">
+	    <property name="jedisConnectionFactory" ref="jedisConnectionFactory"/>
+	</bean>
 </beans>
