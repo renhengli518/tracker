@@ -34,7 +34,7 @@
     id, buttonPosition, linkPosition, viewType, newUserFlag, sessionId, endUserId, ip, 
     clientTime, userurgent, pageUrl, country, province, city, stayTime, stayTimeMilSeconds, 
     pageTitle, fromWhere, clientSystem, clientResolution, clientPageType, serachKeyWords, 
-    stringDate
+    stringDate,refferPage
   </sql>
   <select id="getUserBehaviorBySessionId" parameterType="String" resultMap="BaseResultMap">
     select
@@ -57,6 +57,22 @@
     </if>
     <if test="map.viewType != null">
     	 and viewType = #{map.viewType,jdbcType=VARCHAR} 
+    </if>
+    order by  clientTime desc
+  </select>
+  
+  <select id="getUserBehaviorRecordList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_behavior_record where 1=1
+    <if test="date_start != null">
+      and stringDate >= #{date_start,jdbcType=VARCHAR}
+    </if>
+    <if test="date_end != null">
+     <![CDATA[ and stringDate <= #{date_end,jdbcType=VARCHAR} ]]>
+    </if>
+    <if test="viewType != null">
+    	 and viewType = #{viewType,jdbcType=VARCHAR} 
     </if>
     order by  clientTime desc
   </select>

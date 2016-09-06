@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://java.sun.com/xml/ns/javaee"  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="itfintracker" version="2.5">
   <display-name>Archetype Created Web Application</display-name>
-  <description>sprintMVC环境搭建</description>
+  <description>itfintracker</description>
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:applicationContext-maven.xml</param-value>
@@ -39,6 +39,17 @@
     <servlet-name>pageView</servlet-name>
     <url-pattern>/behavior.img</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>DownLoadFileServlet</servlet-name>
+    <servlet-class>com.hengpeng.itfintracker.commons.servlet.DownLoadFileServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownLoadFileServlet</servlet-name>
+    <url-pattern>/downLoadFileServlet</url-pattern>
+  </servlet-mapping>
+  
   <filter>
     <filter-name>characterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

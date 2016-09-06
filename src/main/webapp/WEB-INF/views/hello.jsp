@@ -7,19 +7,20 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>sprint hello</title>
+<title>文件上传下载</title>
 
 </head>
 
 <body>
 
-	hello ${spring}!
-	<c:if test="${not empty spring}">
-		1
-	</c:if>
-	<c:if test="${empty spring}">
-		2
-	</c:if>
+	<div align="center">
+			<form action="readUploadDocFile" method="post"
+				enctype="multipart/form-data">
+				<input type="file" name="file" /> <input type="submit" value="提交" />
+			</form>
+			<a href="/static/excelTemplate/testExcelImport.xls">下载excel模板</a>
+			<a href="/downLoadFileServlet?url=F:\workspace\itfintracker\src\main\webapp\static\excelTemplate\testExcelImport.xls">下载excel模板</a>
+	</div>
 </body>
 
 </html>

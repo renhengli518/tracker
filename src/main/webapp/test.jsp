@@ -8,10 +8,10 @@
 
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	Calendar calendar = Calendar.getInstance();
-	calendar.add(Calendar.DATE, -1);
+	calendar.add(Calendar.DATE, 0);
 	String todayStr = df.format(calendar.getTime());
-	calendar.add(Calendar.DATE, -7);
-	String lastWeekTodayStr = df.format(calendar.getTime());
+	calendar.add(Calendar.DATE, -1);
+	String yesterdayStr = df.format(calendar.getTime());
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -73,7 +73,7 @@
 			<div class="uk-form-icon">
 				<label class="uk-form-label" for="txt_referDate">对比日期</label>
 				<div class="uk-form-icon">
-					<i class="uk-icon-calendar"></i><input id="txt_referDate" type="text" value="<%=todayStr%>"
+					<i class="uk-icon-calendar"></i><input id="txt_referDate" type="text" value="<%=yesterdayStr%>"
 						onFocus="WdatePicker({isShowClear:false,readOnly:true,maxDate:'%y-%M-%d'})" />
 				</div>
 			</div>

@@ -1,28 +1,19 @@
 package com.hengpeng.itfintracker.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.usermodel.Range;
-import org.apache.poi.hwpf.usermodel.Table;
-import org.apache.poi.hwpf.usermodel.TableCell;
-import org.apache.poi.hwpf.usermodel.TableIterator;
-import org.apache.poi.hwpf.usermodel.TableRow;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hengpeng.itfintracker.commons.page.Page;
+import com.hengpeng.itfintracker.commons.utils.Excel;
 import com.hengpeng.itfintracker.commons.utils.ResultJson;
 
 @Controller
@@ -62,7 +53,6 @@ public class HelloController {
 	 * @return
 	 * @throws IOException
 	 */
-	@SuppressWarnings("null")
 	@RequestMapping("readUploadDocFile")
 	public String readUploadDocFile(HttpServletRequest request , HttpServletResponse response,@RequestParam("file") MultipartFile file) throws IOException{
 //		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
@@ -74,43 +64,38 @@ public class HelloController {
 		//MultipartFile file = multiRequest.getFile("file");
 		String original = file.getOriginalFilename();
 		original = (original == null) ? "" : original;
-		file.transferTo(new File("d:/"+file.getOriginalFilename()));// 写入目标文件
-		FileInputStream in = new FileInputStream("d:/"+file.getOriginalFilename());
-		POIFSFileSystem pfs = new POIFSFileSystem(in);
-		HWPFDocument hwfp = new HWPFDocument(pfs);
-		Range range = hwfp.getRange();
-		TableIterator it = new TableIterator(range);
-		try {
-			int index = 0;
-			while(it.hasNext()){
-				Table table = (Table)it.next();
-				for (int i = 0;i<table.numRows();i++) {
-					TableRow tr = table.getRow(i);
-					for(int j = 0;j<tr.numCells(); j++){
-						TableCell td = tr.getCell(j);
-						String text = td.text();
-						System.out.println("---------word text :-------------"+text);
-					}
-				}
-				index++;
-				in.close();
-			}
-		} catch (Exception e) {
-			in.close();
-			e.printStackTrace();
-		}
+		File file_1 = new File("d:/"+file.getOriginalFilename());
+		file.transferTo(file_1);// 写入目标文件
+		Excel.extractLoanEOT(file_1);
+//		FileInputStream in = new FileInputStream("d:/"+file.getOriginalFilename());
+//		POIFSFileSystem pfs = new POIFSFileSystem(in);
+//		HWPFDocument hwfp = new HWPFDocument(pfs);
+//		Range range = hwfp.getRange();
+//		TableIterator it = new TableIterator(range);
+//		try {
+//			int index = 0;
+//			while(it.hasNext()){
+//				Table table = (Table)it.next();
+//				for (int i = 0;i<table.numRows();i++) {
+//					TableRow tr = table.getRow(i);
+//					for(int j = 0;j<tr.numCells(); j++){
+//						TableCell td = tr.getCell(j);
+//						String text = td.text();
+//						System.out.println("---------word text :-------------"+text);
+//					}
+//				}
+//				index++;
+//				in.close();
+//			}
+//		} catch (Exception e) {
+//			in.close();
+//			e.printStackTrace();
+//		}
 		ResultJson json = new ResultJson(true, 0, file.getName());
 		response.getWriter().write(json.toString());
 		logger.debug("File upload transferTo over");
-		return "userList";
+		return "hello";
 	}
 	
-	@RequestMapping("pageListDemo")
-	@ResponseBody
-	public Page pageListDemo(HttpServletRequest request, String createUserId, String resourceColumn,
-			Page page) {
-		//return baseUserService.getUserInfoPageList(page);
-		return null;
-	} 
 	
 }

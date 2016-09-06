@@ -18,4 +18,6 @@ public interface PageViewService {
 	public List<UserBehaviorRecord> getUserBehaviorBySessionId(String sessionId);
 
 	public Page getUserBehaviorRecordPageList(Page page);
+
+	public List<UserBehaviorRecord> getUserBehaviorRecordList(Map<String, Object> map);
 }

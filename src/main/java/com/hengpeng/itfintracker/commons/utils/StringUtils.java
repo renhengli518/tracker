@@ -4,15 +4,6 @@ import java.util.Random;
 
 
 
-/**
- * 
- * ClassName:StringUtils
- * Function: 字符串个性化处理
- *
- * @author   zhangtian
- * @Date	 2015	2015年5月5日		上午11:12:06
- *
- */
 public class StringUtils extends org.apache.commons.lang.StringUtils {
 
 	public static String[] oldValue = new String[]{"&lt;", "&gt;","&amp;"} ;
@@ -22,7 +13,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 	 * 替换特殊字符
 	 * @param str
 	 * @return
-	 * @author zhangtian
 	 */
 	public static String replaceEscapeChar(String str) {
 		return StringUtils.replaceEach(str, oldValue, newValue) ;
@@ -60,8 +50,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 	}
 	
 	/**
-	 * @author xierongbing
-	 * @date 2015年7月30日 下午3:16:46
 	 * @param str
 	 * @return boolean
 	 * @description 
@@ -72,8 +60,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 	}
 	
 	/**
-	 * @author xierongbing
-	 * @date 2015年8月12日 下午2:41:07
 	 * @param str
 	 * @param size
 	 * @param defaultChar
@@ -95,92 +81,5 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 	}
 	
 	
-	/**
-	 * 日期转中文
-	 * toCNDaySeq
-	 *
-	 * @param daySeq
-	 * @return
-	 * @author xiongping
-	 */
-	public static String toCNDaySeq(int daySeq){
-		String dayStr = "";
-		switch (daySeq) {
-		case 1:
-			dayStr = " 星期一";
-			break;
-		case 2:
-			dayStr = " 星期二";
-			break;
-		case 3:
-			dayStr = " 星期三";
-			break;
-		case 4:
-			dayStr = " 星期四";
-			break;
-		case 5:
-			dayStr = " 星期五";
-			break;
-		case 6:
-			dayStr = " 星期六";
-			break;
-		case 7:
-			dayStr = " 星期日";
-			break;
-		}
-		return dayStr;
-	}
-	/**
-	 * 课程转中文
-	 * toCNClassSeq
-	 *
-	 * @param classSeq
-	 * @return
-	 * @author xiongping
-	 */
-	public static String toCNClassSeq(int classSeq){
-		String classStr = "";
-		switch (classSeq) {
-		case 1:
-			classStr = " 第一节";
-			break;
-		case 2:
-			classStr = " 第二节";
-			break;
-		case 3:
-			classStr = " 第三节";
-			break;
-		case 4:
-			classStr = " 第四节";
-			break;
-		case 5:
-			classStr = " 第五节";
-			break;
-		case 6:
-			classStr = " 第六节";
-			break;
-		case 7:
-			classStr = " 第七节";
-			break;
-		case 8:
-			classStr = " 第八节";
-			break;
-		}
-		return classStr;
-	}
 	
-	/**
-	 * getLowerArea:(截取区域的末级区域)
-	 * @param areaName
-	 * @return
-	 * @author zhangtian
-	 */
-	public static String getLowerArea(String areaName) {
-		
-		if(StringUtils.isNotBlank(areaName)) {
-			String[] str = areaName.split("-") ;
-			return str[str.length-1] ;
-		}
-		return "-" ;
-	}
 }

@@ -12,7 +12,6 @@ import java.util.Set;
 /**
  * CollectionUtil处理集合操作，包括过滤，分割，取并集，交集等。
  * CollectionUtil处理集合类型的转换
- * @author haocongping
  */
 public class CollectionUtils {
 	
@@ -174,8 +173,6 @@ public class CollectionUtils {
 	}
 	
 	/**
-	 * @author xierongbing
-	 * @date 2015年8月12日 下午7:17:15
 	 * @param collection
 	 * @param propertyName
 	 * @return List<String>
@@ -310,7 +307,6 @@ public class CollectionUtils {
 	 * clearRepeatData:(清除List集合重复元素)
 	 * @param collection
 	 * @return
-	 * @author zhangtian
 	 * @version Ver 1.0
 	 * @since   Ver 1.0
 	 */

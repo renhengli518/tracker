@@ -6,7 +6,7 @@
 <%
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	Calendar calendar = Calendar.getInstance();
-	calendar.add(Calendar.DATE, -1);
+	calendar.add(Calendar.DATE, 0);
 	String todayStr = df.format(calendar.getTime());
 	calendar.add(Calendar.DATE, -7);
 	String lastWeekTodayStr = df.format(calendar.getTime());
@@ -15,17 +15,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>用户行为列表</title>
-
+<style>
+	.uk-table td {
+		border: 1px solid #AAA;
+	}
+	.uk-table thead th {
+    	border: 1px solid #AAA;
+	}
+	.uk-table tr:hover{
+		border: 2px solid #AC5;
+	}
+</style>
 </head>
 
 <body ng-controller="userBehaviorRecordListCtrl">
 	<div id="inputUI">
 		<hr style="width: 900px; margin-left: auto; margin-right: auto;">
-		<fieldset class="uk-form" style="width: 800px; margin-left: auto; margin-right: auto;">
+		<fieldset class="uk-form" style="width: 1000px; margin-left: auto; margin-right: auto;">
 			<div class="uk-form-icon">
 				<label class="uk-form-label" for="txt_reportDate">开始日期</label>
 				<div class="uk-form-icon">
-					<i class="uk-icon-calendar"></i><input id="date_start" type="text" value="<%=todayStr%>"
+					<i class="uk-icon-calendar"></i><input id="date_start" type="text" value="<%=lastWeekTodayStr%>"
 						onFocus="WdatePicker({isShowClear:false,readOnly:true,maxDate:'%y-%M-%d'})" />
 				</div>
 			</div>
@@ -45,11 +55,14 @@
 				</div>
 			</div>
 			<div class="uk-form-icon">
-				<button class="uk-button uk-button-primary uk-button-large" ng-click="pageList()">查询</button>
+				<button class="uk-button uk-button-primary" ng-click="pageList()">查询</button>
+			</div>
+			<div class="uk-form-icon">
+				<button class="uk-button uk-button-primary" ng-click="exportPageList()">导出Excel</button>
 			</div>
 		</fieldset>
 	</div>
-	<div id="reportUI_orgData" style="width: auto; margin-left: auto; margin-right: auto;">
+	<div id="reportUI_orgData" style="width: auto; margin-left: 20px; margin-right: 20px;">
 		<table class="uk-table uk-table-hover uk-table-striped">
 			<thead>
 				<tr>
@@ -68,7 +81,7 @@
 					<th width="100px">城市</th>
 					<th width="100px">浏览时长</th>
 					<th width="100px">页面标题</th>
-					<th width="100px">前一页面</th>
+					<th width="100px">上一页面</th>
 					<th width="100px">系统</th>
 					<th width="100px">分辨率</th>
 					<th width="100px">页面类型</th>
@@ -83,7 +96,7 @@
 					<td width="100px" ng-bind="obj.viewtype"></td>
 					<td width="100px" ng-bind="obj.ip"></td>
 					<!-- <td width="100px" ng-bind="obj.sessionid"></td> -->
-					<td width="100px" ng-bind="obj.endUserid"></td>
+					<td width="100px" ng-bind="obj.enduserid"></td>
 					<td width="100px" ng-bind="obj.clienttime"></td>
 					<td width="100px" ng-bind="obj.newuserflag"></td>
 					<td width="100px" ng-bind="obj.userurgent"></td>

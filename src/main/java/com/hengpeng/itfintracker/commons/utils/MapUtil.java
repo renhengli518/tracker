@@ -11,8 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
- * @author xierongbing
- * @date 2015年7月30日 下午4:23:30 
  * @description 
  * 用于封装关于Map的操作
  */
@@ -36,8 +34,6 @@ public final class MapUtil {
 	}
 	
 	/**
-	 * @author xierongbing
-	 * @date 2015年7月30日 下午4:28:31
 	 * @param map
 	 * @param key
 	 * @param value

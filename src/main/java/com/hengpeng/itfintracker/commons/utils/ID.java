@@ -4,7 +4,6 @@ import java.util.Random;
 
 /**
  * 获取主键ID，使用时间+计数器+随机数方式实现
- * @author weiyuan
  */
 public class ID
 {

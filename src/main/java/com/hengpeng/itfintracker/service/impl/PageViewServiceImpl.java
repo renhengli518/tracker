@@ -1,11 +1,13 @@
 package com.hengpeng.itfintracker.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hengpeng.itfintracker.commons.page.Page;
+import com.hengpeng.itfintracker.commons.utils.Excel;
 import com.hengpeng.itfintracker.dao.UserBehaviorRecordMapper;
 import com.hengpeng.itfintracker.entity.UserBehaviorRecord;
 import com.hengpeng.itfintracker.service.PageViewService;
@@ -33,5 +35,10 @@ public class PageViewServiceImpl implements PageViewService {
 		List<UserBehaviorRecord> list = this.pageViewDao.getUserBehaviorRecordPageList(page);
 		page.setData(list);
 		return page;
+	}
+
+	public List<UserBehaviorRecord> getUserBehaviorRecordList(Map<String, Object> map) {
+		List<UserBehaviorRecord> list = this.pageViewDao.getUserBehaviorRecordList(map);
+		return list;
 	}
 }

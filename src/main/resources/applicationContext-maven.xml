@@ -14,18 +14,22 @@
 
 	<context:component-scan base-package="com.hengpeng.itfintracker" />
 
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<!-- <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" 
-			/> <property name="ignoreResourceNotFound" value="true" /> PropertyPlaceholderConfigurer来分散配置，达到整合多工程下的多个分散的Properties 
-			文件 ignoreUnresolvablePlaceholders为是否忽略不可解析的 Placeholder，如配置了多个PropertyPlaceholderConfigurer，则需设置为true 
-			<property name="ignoreUnresolvablePlaceholders" value="true" /> <property 
-			name="locations"> <list> <value>classpath:jdbc.properties</value> </list> 
-			</property> -->
-		<property name="location">
-			<value>classpath:jdbc.properties</value>
+	<!-- application resource configure start -->
+	<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+		id="configProperties">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+				<value>classpath:jdbc.properties</value>
+			</list>
 		</property>
 	</bean>
+	<bean
+		class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer"
+		id="propertyConfigurer">
+		<property name="properties" ref="configProperties" />
+	</bean>
+ 
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		destroy-method="close">
@@ -96,6 +100,8 @@
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />
 	<context:annotation-config />
+	
+	
 	
 	<!-- 开启定时器扫描 -->
 	<task:annotation-driven/>  

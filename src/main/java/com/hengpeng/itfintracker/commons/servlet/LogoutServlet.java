@@ -12,18 +12,18 @@ import org.apache.commons.lang.StringUtils;
 /**
  * 
  */
-public class LogoutServlet extends HttpServlet {	
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public LogoutServlet() {
-        super();
-    }
-	
+	public LogoutServlet() {
+		super();
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
 		String callback = request.getParameter("callback");
-		//System.out.println("callback=" + callback);
-		if (StringUtils.isNotBlank(callback)){
+		// System.out.println("callback=" + callback);
+		if (StringUtils.isNotBlank(callback)) {
 			response.getWriter().write(callback + "(true)");
 		}
 	}
