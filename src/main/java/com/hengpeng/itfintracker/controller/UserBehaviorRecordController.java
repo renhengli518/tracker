@@ -1,5 +1,6 @@
 package com.hengpeng.itfintracker.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hengpeng.itfintracker.commons.constant.ReturnConstant;
 import com.hengpeng.itfintracker.commons.model.ReturnResultUtil;
 import com.hengpeng.itfintracker.commons.page.Page;
+import com.hengpeng.itfintracker.commons.utils.RedisTemplateUtils;
 import com.hengpeng.itfintracker.commons.utils.UserBehaviorExcelUtils;
 import com.hengpeng.itfintracker.entity.UserBehaviorRecord;
 import com.hengpeng.itfintracker.service.PageViewService;
@@ -47,37 +49,54 @@ public class UserBehaviorRecordController {
 	@ResponseBody
 	public Page getUserBehaviorRecordPageList(HttpServletRequest request, String date_start, String date_end, String viewType, Page page) {
 		logger.debug("查询用户行为分页信息开始");
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtils.isNotEmpty(date_start)){
-			map.put("date_start", date_start);
+		Object o = RedisTemplateUtils.get("userBehavior.list."+date_start+date_end+viewType);
+		if(o != null){
+			//page.setData((List<UserBehaviorRecord>) o);
+			page = (Page) o;
+		}else{
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(StringUtils.isNotEmpty(date_start)){
+				map.put("date_start", date_start);
+			}
+			if(StringUtils.isNotEmpty(viewType)){
+				map.put("viewType", viewType);
+			}
+			if(StringUtils.isNotEmpty(date_end)){
+				map.put("date_end", date_end);
+			}
+			page.setMap(map);
+			page = pageViewService.getUserBehaviorRecordPageList(page);
+			RedisTemplateUtils.save("userBehavior.list."+date_start+date_end+viewType, page,30l);
 		}
-		if(StringUtils.isNotEmpty(viewType)){
-			map.put("viewType", viewType);
-		}
-		if(StringUtils.isNotEmpty(date_end)){
-			map.put("date_end", date_end);
-		}
-		page.setMap(map);
-		page = pageViewService.getUserBehaviorRecordPageList(page);
 		logger.debug("查询用户行为分页信息结束");
 		return page; 
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "exportUserBehaviorRecordList", method = RequestMethod.GET)
 	@ResponseBody
-	public ReturnResultUtil exportUserBehaviorRecordList(HttpServletRequest request,HttpServletResponse response, String date_start, String date_end, String viewType, Page page) throws Exception {
+	public ReturnResultUtil exportUserBehaviorRecordList(HttpServletRequest request,HttpServletResponse response, String date_start, String date_end, String viewType) throws Exception {
 		logger.debug("导出用户行为列表开始");
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(StringUtils.isNotEmpty(date_start)){
-			map.put("date_start", date_start);
+		List<UserBehaviorRecord> list = new ArrayList<UserBehaviorRecord>();
+		Object o = RedisTemplateUtils.get("userBehavior.list.export."+date_start+date_end+viewType);
+		if(o != null){
+			//page.setData((List<UserBehaviorRecord>) o);
+			list = (List<UserBehaviorRecord>) o;
+		}else{
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			if(StringUtils.isNotEmpty(date_start)){
+				map.put("date_start", date_start);
+			}
+			if(StringUtils.isNotEmpty(viewType)){
+				map.put("viewType", viewType);
+			}
+			if(StringUtils.isNotEmpty(date_end)){
+				map.put("date_end", date_end);
+			}
+			list = pageViewService.getUserBehaviorRecordList(map);
+			RedisTemplateUtils.save("userBehavior.list.export."+date_start+date_end+viewType, list,30l);
 		}
-		if(StringUtils.isNotEmpty(viewType)){
-			map.put("viewType", viewType);
-		}
-		if(StringUtils.isNotEmpty(date_end)){
-			map.put("date_end", date_end);
-		}
-		List<UserBehaviorRecord> list = pageViewService.getUserBehaviorRecordList(map);
 		if(CollectionUtils.isNotEmpty(list)){
 			String filePath = UserBehaviorExcelUtils.exportUserBehaviorRecordList(list, exportPath);
 			//自动下载文件开始

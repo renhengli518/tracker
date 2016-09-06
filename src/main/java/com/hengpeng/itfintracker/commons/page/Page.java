@@ -1,9 +1,16 @@
 package com.hengpeng.itfintracker.commons.page;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class Page {
+
+public class Page implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6559260481021008590L;
+
 	private int total; // 总条数
 
 	private int start; // 开始

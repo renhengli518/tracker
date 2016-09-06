@@ -132,4 +132,14 @@
 	<bean id="redisCacheTransfer" class="com.hengpeng.itfintracker.commons.utils.RedisCacheTransfer">
 	    <property name="jedisConnectionFactory" ref="jedisConnectionFactory"/>
 	</bean>
+	
+	<bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+	        p:connectionFactory-ref="jedisConnectionFactory" p:keySerializer-ref="stringRedisSerializer"
+	        p:hashKeySerializer-ref="stringRedisSerializer"
+	        p:hashValueSerializer-ref="stringRedisSerializer" />
+	
+	<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
+	        p:connectionFactory-ref="jedisConnectionFactory" />
 </beans>
