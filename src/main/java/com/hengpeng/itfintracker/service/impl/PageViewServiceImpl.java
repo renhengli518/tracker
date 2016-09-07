@@ -27,8 +27,8 @@ public class PageViewServiceImpl implements PageViewService {
 		return this.pageViewDao.insert(pageView);
 	}
 
-	public List<UserBehaviorRecord> getUserBehaviorBySessionId(String sessionid) {
-		return this.pageViewDao.getUserBehaviorBySessionId(sessionid);
+	public List<UserBehaviorRecord> getUserBehaviorByIp(String ip) {
+		return this.pageViewDao.getUserBehaviorByIp(ip);
 	}
 
 	public Page getUserBehaviorRecordPageList(Page page) {

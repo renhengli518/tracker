@@ -12,7 +12,7 @@ public interface UserBehaviorRecordMapper {
 
 	int insertSelective(UserBehaviorRecord record);
 
-	List<UserBehaviorRecord> getUserBehaviorBySessionId(String sessionid);
+	List<UserBehaviorRecord> getUserBehaviorByIp(String ip);
 
 	List<UserBehaviorRecord> getUserBehaviorRecordPageList(Page page);
 

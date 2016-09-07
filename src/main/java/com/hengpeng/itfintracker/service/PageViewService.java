@@ -15,7 +15,7 @@ public interface PageViewService {
 
 	public int savePageViewInfoToDB(UserBehaviorRecord behaviorUser);
 
-	public List<UserBehaviorRecord> getUserBehaviorBySessionId(String sessionId);
+	public List<UserBehaviorRecord> getUserBehaviorByIp(String ip);
 
 	public Page getUserBehaviorRecordPageList(Page page);
 

@@ -89,7 +89,7 @@ public class PageViewServlet extends HttpServlet {
 		String viewType = bd_map.get("viewType");
 		String browserType = bd_map.get("browserType");
 		String browserVersion = bd_map.get("browserVersion");
-		List<UserBehaviorRecord> list = this.pageViewService.getUserBehaviorBySessionId(sessionId);
+		List<UserBehaviorRecord> list = this.pageViewService.getUserBehaviorByIp(ip);
 		String newUserFlag = "YES";
 		if (CollectionUtils.isNotEmpty(list) && list.size() > 0) {
 			newUserFlag = "NO";

@@ -28,7 +28,11 @@ import com.hengpeng.itfintracker.commons.model.FileUpload;
 import com.hengpeng.itfintracker.commons.model.MultipartFileValidator;
 import com.hengpeng.itfintracker.commons.model.ReturnResultUtil;
 import com.hengpeng.itfintracker.commons.utils.UserBehaviorExcelUtils;
-
+/**
+ * 通用文件上传
+ * @author renhengli
+ * @date 2016年9月7日
+ */
 @Controller
 public class UploadController {
     private static final Logger logger = Logger.getLogger(UploadController.class);
