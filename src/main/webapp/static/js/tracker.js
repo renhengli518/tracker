@@ -135,14 +135,13 @@ window.onunload = function(){
 }
 /**
  * 获取浏览器类型和版本
- * @returns {___anonymous4550_4551}
  */
 function getBrowserInfo(){
     var Sys = {};
     var ua = navigator.userAgent.toLowerCase();
     var re =/(msie|firefox|chrome|opera|version).*?([\d.]+)/;
     var m = ua.match(re);
-    Sys.browser = m[1].replace(/version/, "'safari");
+    Sys.browser = m[1].replace(/version/, "safari");
     Sys.version = m[2];
     return Sys;
 }
@@ -305,17 +304,18 @@ function addPublicParameter(m, s) {// 添加公共参数
 	var o = new RegExp(l, "i");
 	if (r.test(n)) {
 		m += "&s_plt=IOSSystem";// 客户端系统
-		m += "&s_ct=H5"
+		m += "&s_ct=H5";
 	} else {
 		if (p.test(n)) {
-			m += "&s_plt=iPad-PC";
-			m += "&s_ct=" + navigator.platform || ""
+			m += "&s_plt="+ navigator.platform || "";
+			m += "&s_ct=iPad-PC";
 		} else {
 			if (o.test(n)) {
 				m += "&s_plt=AndroidSystem";
 				m += "&s_ct=H5"
 			} else {
-				m += "&s_plt=" + navigator.platform || ""
+				m += "&s_plt=" + navigator.platform || "";
+				m +="&s_ct=PC";
 			}
 		}
 	}

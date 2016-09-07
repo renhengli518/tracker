@@ -4,7 +4,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
+/**
+ * @author renhengli
+ * @date 2016年9月7日
+ * @version 1.0
+ */
 public class SerializeUtil {
 
 	public static byte[] serialize(Object object) {

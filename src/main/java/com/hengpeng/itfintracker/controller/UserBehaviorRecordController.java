@@ -49,7 +49,8 @@ public class UserBehaviorRecordController {
 	@ResponseBody
 	public Page getUserBehaviorRecordPageList(HttpServletRequest request, String date_start, String date_end, String viewType, Page page) {
 		logger.debug("查询用户行为分页信息开始");
-		Object o = RedisTemplateUtils.get("userBehavior.list."+date_start+date_end+viewType);
+		Object o = RedisTemplateUtils.get("userBehavior.list."+date_start+"_"+date_end+"_"+viewType+"_"+page.getStart()+"_"+page.getEnd());
+		//List<?> list = RedisTemplateUtils.lget("userBehavior_1.list."+date_start+"_"+date_end+"_"+viewType+"_"+page.getStart()+"_"+page.getEnd());
 		if(o != null){
 			//page.setData((List<UserBehaviorRecord>) o);
 			page = (Page) o;
@@ -66,7 +67,8 @@ public class UserBehaviorRecordController {
 			}
 			page.setMap(map);
 			page = pageViewService.getUserBehaviorRecordPageList(page);
-			RedisTemplateUtils.save("userBehavior.list."+date_start+date_end+viewType, page,30l);
+			RedisTemplateUtils.set("userBehavior.list."+date_start+"_"+date_end+"_"+viewType+"_"+page.getStart()+"_"+page.getEnd(), page,60l);
+			//RedisTemplateUtils.lpush("userBehavior_1.list."+date_start+"_"+date_end+"_"+viewType+"_"+page.getStart()+"_"+page.getEnd(), page.getData(),60l);
 		}
 		logger.debug("查询用户行为分页信息结束");
 		return page; 
@@ -95,7 +97,7 @@ public class UserBehaviorRecordController {
 				map.put("date_end", date_end);
 			}
 			list = pageViewService.getUserBehaviorRecordList(map);
-			RedisTemplateUtils.save("userBehavior.list.export."+date_start+date_end+viewType, list,30l);
+			RedisTemplateUtils.set("userBehavior.list.export."+date_start+date_end+viewType, list,30l);
 		}
 		if(CollectionUtils.isNotEmpty(list)){
 			String filePath = UserBehaviorExcelUtils.exportUserBehaviorRecordList(list, exportPath);

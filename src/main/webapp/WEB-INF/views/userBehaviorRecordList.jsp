@@ -111,7 +111,7 @@
 					<td width="100px" ng-bind="obj.refferpage"></td>
 					<td width="100px" ng-bind="obj.clientsystem"></td>
 					<td width="100px" ng-bind="obj.clientresolution"></td>
-					<td width="100px" ng-bind="obj.clientpageType"></td>
+					<td width="100px" ng-bind="obj.clientpagetype"></td>
 					<td width="100px" ng-bind="obj.fromwhere"></td>
 					<td width="100px" ng-bind="obj.serachkeywords"></td>
 				</tr>
