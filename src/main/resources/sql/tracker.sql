@@ -10,11 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2016-09-06 12:45:48
+Date: 2016-09-08 10:43:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
 
 -- ----------------------------
 -- Table structure for media_access_census
@@ -31,7 +30,6 @@ CREATE TABLE `media_access_census` (
   `date` datetime DEFAULT NULL,
   `stringDate` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 -- ----------------------------
 -- Table structure for user_behavior_record
