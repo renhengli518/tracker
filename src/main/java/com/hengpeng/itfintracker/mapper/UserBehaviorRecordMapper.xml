@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hengpeng.itfintracker.dao.UserBehaviorRecordMapper">
 	<!--redis缓存，会自动缓存所有的查询，当数据有变动时才会查询数据库-->
-	<!-- <cache type="com.hengpeng.itfintracker.commons.utils.RedisCache"/> -->
+	<!-- <cache eviction="FIFO" flushInterval="600000" size="1024" readOnly="true" type="com.hengpeng.itfintracker.commons.utils.RedisCache"/> -->
 
   <resultMap id="BaseResultMap" type="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
     <result column="id" jdbcType="BIGINT" property="id" />
@@ -30,6 +30,9 @@
     <result column="stringDate" jdbcType="VARCHAR" property="stringdate" />
     <result column="browserType" jdbcType="VARCHAR" property="browsertype" />
     <result column="browserVersion" jdbcType="VARCHAR" property="browserversion" />
+	<result column="isMobile" jdbcType="TINYINT" property="ismobile" />
+	<result column="completeDeviceName" jdbcType="VARCHAR" property="completedevicename" />
+	<result column="formFactor" jdbcType="VARCHAR" property="formfactor" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
     <result column="refferPage" jdbcType="LONGVARCHAR" property="refferpage" />
@@ -39,7 +42,7 @@
     id, buttonPosition, linkPosition, viewType, newUserFlag, sessionId, endUserId, ip, 
     clientTime, userurgent, pageUrl, country, province, city, stayTime, stayTimeMilSeconds, 
     pageTitle, fromWhere, clientSystem, clientResolution, clientPageType, serachKeyWords, 
-    stringDate,refferPage,browserType,browserVersion
+    stringDate,refferPage,browserType,browserVersion,isMobile,completeDeviceName,formFactor
   </sql>
   <select id="getUserBehaviorByIp" parameterType="String" resultMap="BaseResultMap">
     select
@@ -90,7 +93,7 @@
       province, city, stayTime, 
       stayTimeMilSeconds, pageTitle, fromWhere, 
       clientSystem, clientResolution, clientPageType, 
-      serachKeyWords, stringDate, refferPage,browserType,browserVersion
+      serachKeyWords, stringDate, refferPage,browserType,browserVersion,isMobile,completeDeviceName,formFactor
       )
     values (#{id,jdbcType=BIGINT}, #{buttonposition,jdbcType=VARCHAR}, #{linkposition,jdbcType=VARCHAR}, 
       #{viewtype,jdbcType=VARCHAR}, #{newuserflag,jdbcType=VARCHAR}, #{sessionid,jdbcType=VARCHAR}, 
@@ -100,7 +103,8 @@
       #{staytimemilseconds,jdbcType=BIGINT}, #{pagetitle,jdbcType=VARCHAR}, #{fromwhere,jdbcType=VARCHAR}, 
       #{clientsystem,jdbcType=VARCHAR}, #{clientresolution,jdbcType=VARCHAR}, #{clientpagetype,jdbcType=VARCHAR}, 
       #{serachkeywords,jdbcType=VARCHAR}, #{stringdate,jdbcType=VARCHAR}, #{refferpage,jdbcType=LONGVARCHAR}
-      , #{browsertype,jdbcType=VARCHAR}, #{browserversion,jdbcType=VARCHAR})
+      , #{browsertype,jdbcType=VARCHAR}, #{browserversion,jdbcType=VARCHAR},#{ismobile,jdbcType=TINYINT},
+      #{completedevicename,jdbcType=VARCHAR},#{formfactor,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
     insert into user_behavior_record
@@ -183,6 +187,15 @@
       <if test="browserversion != null">
         browserversion,
       </if>
+      <if test="ismobile != null">
+        ismobile,
+      </if>
+      <if test="completedevicename != null">
+        completedevicename,
+      </if>
+      <if test="formfactor != null">
+        formfactor,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -262,6 +275,15 @@
       </if>
        <if test="browserversion != null">
         #{browserversion,jdbcType=VARCHAR},
+      </if>
+       <if test="ismobile != null">
+        #{ismobile,jdbcType=TINYINT},
+      </if>
+       <if test="completedevicename != null">
+        #{completedevicename,jdbcType=VARCHAR},
+      </if>
+       <if test="formfactor != null">
+        #{formfactor,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

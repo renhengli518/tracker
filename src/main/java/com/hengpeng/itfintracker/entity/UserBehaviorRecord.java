@@ -67,6 +67,12 @@ public class UserBehaviorRecord implements Serializable {
 
 	private String browserversion;
 
+	private Boolean ismobile;
+
+	private String completedevicename;
+
+	private String formfactor;
+
 	public Long getId() {
 		return id;
 	}
@@ -275,56 +281,39 @@ public class UserBehaviorRecord implements Serializable {
 		this.browserversion = browserversion;
 	}
 
-	/**
-	 * 构造方法
-	 * 
-	 * @param sessionId
-	 * @param uuid
-	 * @param memberId
-	 * @param refPage
-	 * @param firstPage
-	 * @param initTime
-	 * @param orderId
-	 * @param currentTime
-	 * @param currentPage
-	 * @param isNewVisit
-	 */
+	public Boolean getIsmobile() {
+		return ismobile;
+	}
+
+	public void setIsmobile(Boolean ismobile) {
+		this.ismobile = ismobile;
+	}
+
+	public String getCompletedevicename() {
+		return completedevicename;
+	}
+
+	public void setCompletedevicename(String completedevicename) {
+		this.completedevicename = completedevicename;
+	}
+
+	public String getFormfactor() {
+		return formfactor;
+	}
+
+	public void setFormfactor(String formfactor) {
+		this.formfactor = formfactor;
+	}
 
 	public UserBehaviorRecord() {
 		super();
 	}
 
-	/**
-	 * 构造方法
-	 * 
-	 * @param buttonPosition
-	 * @param linkPosition
-	 * @param viewType
-	 * @param ip
-	 * @param sessionId
-	 * @param endUserId
-	 * @param clientTime
-	 * @param newUserFlag
-	 * @param userurgent
-	 * @param pageUrl
-	 * @param country
-	 * @param province
-	 * @param city
-	 * @param stayTime
-	 * @param stayTimeMilSeconds
-	 * @param pageTitle
-	 * @param refferPage
-	 * @param clientSystem
-	 * @param clientResolution
-	 * @param clientPageType
-	 * @param fromWhere
-	 * @param serachKeyWords
-	 * @param stringDate
-	 */
 	public UserBehaviorRecord(String buttonPosition, String linkPosition, String viewType, String ip, String sessionId, String endUserId,
 			Date clientTime, String newUserFlag, String userurgent, String pageUrl, String country, String province, String city, String stayTime,
 			Long stayTimeMilSeconds, String pageTitle, String refferPage, String clientSystem, String clientResolution, String clientPageType,
-			String fromWhere, String serachKeyWords, String stringDate, String browserType, String browserVersion) {
+			String fromWhere, String serachKeyWords, String stringDate, String browserType, String browserVersion, Boolean isMobile,
+			String completeDeviceName, String formFactor) {
 		super();
 		this.id = ID.getInstanse().getID(18);
 		this.buttonposition = buttonPosition;
@@ -352,5 +341,8 @@ public class UserBehaviorRecord implements Serializable {
 		this.stringdate = stringDate;
 		this.browsertype = browserType;
 		this.browserversion = browserVersion;
+		this.ismobile = isMobile;
+		this.completedevicename = completeDeviceName;
+		this.formfactor = formFactor;
 	}
 }

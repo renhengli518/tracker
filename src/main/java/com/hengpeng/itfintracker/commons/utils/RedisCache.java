@@ -14,7 +14,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
 /**
- * 
+ * redis二级缓存使用
  * @author renhengli
  *
  */

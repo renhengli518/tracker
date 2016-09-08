@@ -4,6 +4,12 @@
  * @description being using for other project to get anlysis data.
  * @date 2016-08-31 
  */
+// Copyright 2016 - ScientiaMobile, Inc., Reston, VA
+// WURFL Device Detection
+// Terms of service:
+// http://web.wurfl.io/license
+//eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){while(c--){d[c]=k[c]||c}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('9 8={"7":6,"4":"3 2 5","1":"0"};',10,10,'Smartphone|form_factor|Nexus|Google|complete_device_name||true|is_mobile|WURFL|var'.split('|'),0,{}))
+
 var pageUrl ;
 var country,province,city;
 var begintime = new Date(); 
@@ -18,7 +24,18 @@ var serachKeyWords="";
 var urlPrefix = {ga: "http://192.168.1.96:7777"};
 var browserType;
 var browserVersion;
+var is_mobile = false;
+var complete_device_name,form_factor;
+
 $(function(){
+	//先引入获取手机类型的js
+	//$("head").append('<script type="text/javascript" src="//wurfl.io/wurfl.js"></script>');
+	$.getScript('//wurfl.io/wurfl.js', function(){
+		is_mobile = WURFL.is_mobile;
+		complete_device_name = WURFL.complete_device_name;
+		form_factor = WURFL.form_factor;
+		console.log(WURFL);
+	});
 	//判断用户是否登录,需要在植入代码的页面定义全局变量，并获取登录的用户的userID
 	if(userId && userId != null && userId != ""){
 		endUserId = userId;
@@ -149,6 +166,13 @@ function getBrowserInfo(){
 /** 用户行为记录 */
 function gotracker( buttonPosition,linkPosition,viewType, endUserId, 
 		 pageUrl, country,  province, city, pageTitle, refferPage,fromWhere,serachKeyWords,browserType,browserVersion) {// 行为记录调用函数
+	//增加地理位置的获取的验证 和 设备类型获取的验证，防止恶意刷新，攻击服务，同时也会过了掉时间非常小的访问（可忽略不计）
+	if(!country || country == "" || country == null || country == "undefined"){
+		return false;
+	}
+	if(!complete_device_name || complete_device_name == "" || complete_device_name == null || complete_device_name == "undefined"){
+		return false;
+	}
 	//首先判断是否是新访客
 	var endtime = new Date();
 	var waittime = endtime.getTime() - begintime.getTime();
@@ -228,6 +252,9 @@ function gotracker( buttonPosition,linkPosition,viewType, endUserId,
 	w.addParameter(new Parameter("stayTime", stayTime));
 	w.addParameter(new Parameter("stayTimeMilSeconds", waittime));
     //console.log(w.toUrl());
+	w.addParameter(new Parameter("is_mobile", is_mobile));
+	w.addParameter(new Parameter("complete_device_name", complete_device_name));
+	w.addParameter(new Parameter("form_factor", form_factor));
 	sendImgUrl(w.toUrl());
 }
 function sendImgUrl(d) {// 发送用户行为记录请求
@@ -390,3 +417,6 @@ trackerSupportKey.fromWhere = "fromWhere";
 trackerSupportKey.endUserId = "endUserId";
 trackerSupportKey.browserType = "browserType";
 trackerSupportKey.browserVersion = "browserVersion";
+trackerSupportKey.is_mobile = "is_mobile";
+trackerSupportKey.complete_device_name = "complete_device_name";
+trackerSupportKey.form_factor = "form_factor";

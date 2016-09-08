@@ -89,6 +89,9 @@ public class PageViewServlet extends HttpServlet {
 		String viewType = bd_map.get("viewType");
 		String browserType = bd_map.get("browserType");
 		String browserVersion = bd_map.get("browserVersion");
+		Boolean isMobile = Boolean.valueOf(bd_map.get("is_mobile"));
+		String completeDeviceName = bd_map.get("complete_device_name");
+		String formFactor = bd_map.get("form_factor");
 		List<UserBehaviorRecord> list = this.pageViewService.getUserBehaviorByIp(ip);
 		String newUserFlag = "YES";
 		if (CollectionUtils.isNotEmpty(list) && list.size() > 0) {
@@ -99,7 +102,8 @@ public class PageViewServlet extends HttpServlet {
 		 */
 		UserBehaviorRecord behaviorUser = new UserBehaviorRecord(buttonPosition, linkPosition, viewType, ip, sessionId, endUserId, clientTime,
 				newUserFlag, userurgent, pageUrl, country, province, city, stayTime, stayTimeMilSeconds, pageTitle, refferPage, clientSystem,
-				clientResolution, clientPageType, fromWhere, serachKeyWords, stringDate, browserType, browserVersion);
+				clientResolution, clientPageType, fromWhere, serachKeyWords, stringDate, browserType, browserVersion, isMobile, completeDeviceName,
+				formFactor);
 		this.pageViewService.savePageViewInfoToDB(behaviorUser);
 	}
 

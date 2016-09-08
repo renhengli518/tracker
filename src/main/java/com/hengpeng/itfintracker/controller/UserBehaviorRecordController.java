@@ -111,7 +111,7 @@ public class UserBehaviorRecordController {
 					map.put("date_end", date_end);
 				}
 				list = pageViewService.getUserBehaviorRecordList(map);
-				RedisTemplateUtils.set("userBehavior.list.export." + date_start + date_end + viewType, list, 30l);
+				RedisTemplateUtils.set("userBehavior.list.export." + date_start + date_end + viewType, list, redisCacheTimeout);
 			}
 			if (CollectionUtils.isNotEmpty(list)) {
 				String filePath = UserBehaviorExcelUtils.exportUserBehaviorRecordList(list, exportPath);
