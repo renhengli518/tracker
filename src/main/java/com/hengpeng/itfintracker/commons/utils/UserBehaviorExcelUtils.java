@@ -100,12 +100,12 @@ public class UserBehaviorExcelUtils {
 		WritableWorkbook book = null;
 		String filepath = "";
 		try {
-			 File destDir = new File(path);
-		        if (!destDir.exists()) {
-		            destDir.mkdirs();
-		        }
+			File destDir = new File(path);
+			if (!destDir.exists()) {
+				destDir.mkdirs();
+			}
 			// 打开文件
-			String fileName = DateUtils.format(System.currentTimeMillis(),"yyyy_MM_dd_HH_mm_ss") + "_" + "用户行为报表" + ".xls";
+			String fileName = DateUtils.format(System.currentTimeMillis(), "yyyy_MM_dd_HH_mm_ss") + "_" + "用户行为报表" + ".xls";
 			filepath = path + File.separator + fileName;// 导出的文件的路径
 			book = Workbook.createWorkbook(new File(path, fileName));
 			WritableSheet sheet = book.createSheet("用户行为列表", 0);// 第一个sheet的题目
@@ -171,9 +171,18 @@ public class UserBehaviorExcelUtils {
 
 			Label label19 = new Label(19, 0, "搜索关键字");
 			sheet.addCell(label19);
-			
+
 			Label label20 = new Label(20, 0, "浏览器版本");
 			sheet.addCell(label20);
+
+			Label label21 = new Label(21, 0, "是否手机");
+			sheet.addCell(label21);
+
+			Label label22 = new Label(22, 0, "设备名称");
+			sheet.addCell(label22);
+
+			Label label23 = new Label(23, 0, "规格");
+			sheet.addCell(label23);
 
 			for (int i = 0; i < list.size(); i++) {// 行数为数据集合的大小
 
@@ -191,54 +200,63 @@ public class UserBehaviorExcelUtils {
 
 				Label e = new Label(4, i + 1, list.get(i).getEnduserid());
 				sheet.addCell(e);
-				
+
 				Label f = new Label(5, i + 1, DateUtils.format(list.get(i).getClienttime(), "yyyy-MM-dd HH:mm:ss"));
 				sheet.addCell(f);
-				
+
 				Label g = new Label(6, i + 1, list.get(i).getNewuserflag());
 				sheet.addCell(g);
-				
+
 				Label h = new Label(7, i + 1, list.get(i).getBrowsertype());
 				sheet.addCell(h);
-				
+
 				Label j = new Label(8, i + 1, list.get(i).getPageurl());
 				sheet.addCell(j);
-				
+
 				Label k = new Label(9, i + 1, list.get(i).getCountry());
 				sheet.addCell(k);
-				
+
 				Label l = new Label(10, i + 1, list.get(i).getProvince());
 				sheet.addCell(l);
-				
+
 				Label m = new Label(11, i + 1, list.get(i).getCity());
 				sheet.addCell(m);
-				
+
 				Label n = new Label(12, i + 1, list.get(i).getStaytime());
 				sheet.addCell(n);
-				
+
 				Label o = new Label(13, i + 1, list.get(i).getPagetitle());
 				sheet.addCell(o);
-				
+
 				Label p = new Label(14, i + 1, list.get(i).getRefferpage());
 				sheet.addCell(p);
-				
+
 				Label q = new Label(15, i + 1, list.get(i).getClientsystem());
 				sheet.addCell(q);
-				
+
 				Label r = new Label(16, i + 1, list.get(i).getClientresolution());
 				sheet.addCell(r);
-				
+
 				Label s = new Label(17, i + 1, list.get(i).getClientpagetype());
 				sheet.addCell(s);
-				
+
 				Label t = new Label(18, i + 1, list.get(i).getFromwhere());
 				sheet.addCell(t);
-				
+
 				Label u = new Label(19, i + 1, list.get(i).getSerachkeywords());
 				sheet.addCell(u);
-				
+
 				Label v = new Label(20, i + 1, list.get(i).getBrowserversion());
 				sheet.addCell(v);
+
+				Label w = new Label(21, i + 1, list.get(i).getIsmobile() == null ? "暂无" : (list.get(i).getIsmobile() ? "是" : "否"));
+				sheet.addCell(w);
+
+				Label x = new Label(22, i + 1, list.get(i).getCompletedevicename());
+				sheet.addCell(x);
+
+				Label y = new Label(23, i + 1, list.get(i).getFormfactor());
+				sheet.addCell(y);
 			}
 			// 写入数据并关闭文件
 			book.write();

@@ -88,6 +88,9 @@
 					<th width="100px">页面类型</th>
 					<th width="100px">访问来源</th>
 					<th width="100px">搜索关键字</th>
+					<th width="100px">是否手机</th>
+					<th width="100px">设备名称</th>
+					<th width="100px">规格</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -114,6 +117,9 @@
 					<td width="100px" ng-bind="obj.clientpagetype"></td>
 					<td width="100px" ng-bind="obj.fromwhere"></td>
 					<td width="100px" ng-bind="obj.serachkeywords"></td>
+					<td width="100px" ng-bind="obj.ismobile ? '是' : '否'"></td>
+					<td width="100px" ng-bind="obj.completedevicename"></td>
+					<td width="100px" ng-bind="obj.formfactor"></td>
 				</tr>
 			</tbody>
 		</table>

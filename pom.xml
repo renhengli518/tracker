@@ -198,11 +198,11 @@
 		    <artifactId>spring-data-redis</artifactId>
 		    <version>1.6.2.RELEASE</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis-ehcache</artifactId>
 		    <version>1.0.0</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>

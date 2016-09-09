@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hengpeng.itfintracker.dao.UserBehaviorRecordMapper">
 	<!--redis缓存，会自动缓存所有的查询，当数据有变动时才会查询数据库-->
-	<!-- <cache eviction="FIFO" flushInterval="600000" size="1024" readOnly="true" type="com.hengpeng.itfintracker.commons.utils.RedisCache"/> -->
+	<cache eviction="FIFO" flushInterval="600000" size="1024" readOnly="true" type="com.hengpeng.itfintracker.commons.utils.RedisCache"/>
 
   <resultMap id="BaseResultMap" type="com.hengpeng.itfintracker.entity.UserBehaviorRecord">
     <result column="id" jdbcType="BIGINT" property="id" />
@@ -53,7 +53,8 @@
     </if>
   </select>
   
-  <select id="getUserBehaviorRecordPageList" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <!-- 配置无需开启二级缓存 -->
+  <select id="getUserBehaviorRecordPageList" parameterType="java.util.Map" resultMap="BaseResultMap" timeout="3000" flushCache="false" useCache="false">
     select
     <include refid="Base_Column_List" />
     from user_behavior_record where 1=1
